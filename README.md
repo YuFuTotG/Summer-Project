@@ -1,5 +1,4 @@
-# Tetris-Remake
-The game Tetris and original Idea's built from that engine
+# Summer-Project
 
 If you have successfully cloned this repository, please do the following steps:
 	-make a branch (name it "myBranch")
