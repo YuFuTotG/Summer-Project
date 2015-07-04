@@ -16,6 +16,8 @@ I Have succesfully made a push to this github repository:      ##
 	- Amy                                                  ##
 	- Yu Fu                                                ##
 	- Jenny Kim                                            ##
-	- Frankyy J. Mcdougal                                  ##
 	- Edward                                               ##
+	- Brian Chan                                           ##
+	- Gary Lin                                             ##
+	-                                                      ##
 #################################################################
