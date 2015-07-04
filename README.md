@@ -13,9 +13,9 @@ If you are having difficulties with any of the steps above, please contact eithe
 
 #################################################################
 I Have succesfully made a push to this github repository:      ##
-	- Amy                                                        ##
-	-                                                            ##
-	-                                                            ##
-	-                                                            ##
-	-                                                            ##
+	- Amy                                                  ##
+	- Yu Fu                                                ##
+	-                                                      ##
+	-                                                      ##
+	-                                                      ##
 #################################################################
