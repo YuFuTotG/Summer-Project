@@ -19,5 +19,5 @@ I Have succesfully made a push to this github repository:      ##
 	- Edward                                               ##
 	- Brian Chan                                           ##
 	- Gary Lin                                             ##
-	-                                                      ##
+	- Franky Mcdougal				       ##
 #################################################################
