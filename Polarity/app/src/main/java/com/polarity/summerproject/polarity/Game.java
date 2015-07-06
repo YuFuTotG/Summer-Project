@@ -1,67 +1,36 @@
 package com.polarity.summerproject.polarity;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.widget.TextView;
+import android.view.MotionEvent;
 
-/**
- * Created by Malzberry on 7/5/2015.
- */
-public class Game extends SurfaceView implements SurfaceHolder.Callback {
+public class Game{
+    //int testX, testY, sizeX, sizeY;
     Paint paint;
-    SurfaceHolder ourHolder;
-    public Game(Context context) {
-        super(context);
+    Paint bg;
+    Screen screen;
 
-        ourHolder = getHolder();
-        ourHolder.addCallback(this);
-        this.run();
-    }
-    public void run(){
+    public Game(Screen screen) {
         paint = new Paint();
+        bg = new Paint();
+        bg.setColor(Color.BLACK);
+        paint.setColor(Color.WHITE);
 
-        paint.setColor(Color.BLACK);
-        Canvas canvas = ourHolder.lockCanvas();
-        canvas.drawRect(0, 0, 200, 200, paint);
+        this.screen = screen;
+    }
 
+    public void draw(Canvas canvas){
+        // draw bg first
+        canvas.drawRect(0, 0, canvas.getWidth(), canvas.getWidth(), bg);
+        canvas.drawRect(0,0, screen.getWidth(), screen.getHeight(), paint);
+    }
 
-        /*
-        //while(true) {
-
-            testText.setText("!IT WORKED!");
-        try {
-            Thread.sleep(1000);
-        }catch(InterruptedException e){
-            System.out.println(e);
+    public void onTouch(MotionEvent me){
+        if (me.getX() < screen.getWidth()/2){
+            paint.setColor(Color.RED);
+        }else{
+            paint.setColor(Color.WHITE);
         }
-            testText.setText("!!IT WORKED!!");
-        try {
-            Thread.sleep(1000);
-        }catch(InterruptedException e){
-            System.out.println(e);
-        }
-            testText.setText("!!!IT WORKED!!!");
-        //}
-        */
-
     }
-
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-    }
-
-    public void surfaceDestroyed(SurfaceHolder arg0) {
-
-    }
-
 }
