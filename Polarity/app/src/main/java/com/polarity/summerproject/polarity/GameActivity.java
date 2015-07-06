@@ -1,20 +1,21 @@
 package com.polarity.summerproject.polarity;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameActivity extends Activity {
-    //public void runGame();
-
     int FPS = 30;
-
+    Game game;
+    Screen screen;
     protected GameSurfaceView gameView;
 
     @Override
@@ -23,8 +24,24 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        gameView = new GameSurfaceView(this);
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screen = new Screen(size.y, size.x); // SCREEN
+
+        game = new Game(screen); // GAME DECLARATION
+        gameView = new GameSurfaceView(this, game);
         setContentView(gameView);
+
+        // Get Touch Input
+        gameView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent me){
+                // DO THINGS WITH TOUCH EVENTS
+                game.onTouch(me);
+                return false;
+            }
+        });
     }
 
     @Override

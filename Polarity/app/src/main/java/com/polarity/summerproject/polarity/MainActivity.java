@@ -2,35 +2,25 @@ package com.polarity.summerproject.polarity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-/*
- * setContentView to surfaceView, start up Game class.
- */
-
 public class MainActivity extends Activity {
     Button startButton;
-    //SurfaceHolder mySurfaceHolder;
-
-    //Paint paint;
-    //Bitmap b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+
 
         setContentView(R.layout.activity_main);
 
@@ -42,6 +32,7 @@ public class MainActivity extends Activity {
                 startActivity(goToGame);
             }
         });
+
 
     }
 

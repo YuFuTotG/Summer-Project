@@ -12,10 +12,12 @@ public class GameSurfaceView extends SurfaceView implements Runnable{
     private Thread gameThread;
     private SurfaceHolder holder;
     Paint paint;
+    Game game;
 
-    public GameSurfaceView(Context context) {
+    public GameSurfaceView(Context context, Game game) {
         super(context);
         paint = new Paint();
+        this.game = game;
 
         holder = getHolder();
         // Here we can handle additional surface notifications (i.e. created, destroyed, etc.)
@@ -39,7 +41,8 @@ public class GameSurfaceView extends SurfaceView implements Runnable{
             if(canvas != null) {
                 // game.draw();
                 // canvas.draw(...);
-                canvas.drawRect(0,0,200,200, paint);
+                game.draw(canvas);
+
                 holder.unlockCanvasAndPost(canvas);
             }
 
