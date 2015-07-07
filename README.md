@@ -1,5 +1,13 @@
 # Summer-Project
 
+Jenny, help me add to this when you get a chance:
+Git good practices:
+-push frequently, and keep changes small.
+-git commit comments should be in present tense, short and to the point
+-never accept your own pull request
+-when experimenting with a feature, make your own seperate branch to avoid slips
+
+
 If you have successfully cloned this repository, please do the following steps:
 	-make a branch (name it "myBranch")
 	-edit the README by adding your name in the provided area below
