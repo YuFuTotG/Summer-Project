@@ -6,6 +6,7 @@ Git good practices:
 -git commit comments should be in present tense, short and to the point
 -never accept your own pull request
 -when experimenting with a feature, make your own seperate branch to avoid slips
+-When you are done with a branch, remove it. Keep the workspace clean.
 
 
 If you have successfully cloned this repository, please do the following steps:
