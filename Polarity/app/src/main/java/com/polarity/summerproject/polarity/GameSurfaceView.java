@@ -90,9 +90,7 @@ public class GameSurfaceView extends SurfaceView implements Runnable{
                     holder.unlockCanvasAndPost(canvas);
                 }
             }
-
         }
-
     }
 
     public void resume(){
