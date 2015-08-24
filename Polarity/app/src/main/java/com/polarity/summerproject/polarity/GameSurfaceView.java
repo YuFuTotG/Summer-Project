@@ -92,7 +92,7 @@ public class GameSurfaceView extends SurfaceView implements Runnable{
             }
         }
     }
-
+    //test
     public void resume(){
         isRunning = true;
         gameThread = new Thread(this);
