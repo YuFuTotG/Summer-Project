@@ -19,9 +19,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
-
-
         setContentView(R.layout.activity_main);
 
         startButton = (Button) findViewById(R.id.startButton);
@@ -32,8 +29,6 @@ public class MainActivity extends Activity {
                 startActivity(goToGame);
             }
         });
-
-
     }
 
     @Override

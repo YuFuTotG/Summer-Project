@@ -20,6 +20,10 @@ public class Game{
         this.screen = screen;
     }
 
+    public void update(){
+
+    }
+
     public void draw(Canvas canvas){
         // draw bg first
         canvas.drawRect(0, 0, canvas.getWidth(), canvas.getWidth(), bg);
