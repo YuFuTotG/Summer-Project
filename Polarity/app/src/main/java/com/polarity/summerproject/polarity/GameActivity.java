@@ -1,6 +1,7 @@
 package com.polarity.summerproject.polarity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -17,6 +18,7 @@ public class GameActivity extends Activity {
     Game game;
     Screen screen;
     protected GameSurfaceView gameView;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -30,6 +32,9 @@ public class GameActivity extends Activity {
         screen = new Screen(size.y, size.x); // SCREEN
 
         game = new Game(screen); // GAME DECLARATION
+        game.setContext(this);
+        game.obsHolderInit();
+
         gameView = new GameSurfaceView(this, game);
         setContentView(gameView);
 
