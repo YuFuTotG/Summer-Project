@@ -1,12 +1,16 @@
 package com.polarity.summerproject.polarity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 public class GameSurfaceView extends SurfaceView implements Runnable{
     private boolean isRunning = false;
@@ -59,7 +63,13 @@ public class GameSurfaceView extends SurfaceView implements Runnable{
                     framesSkipped = 0;  // reset frames skipped
 
                     // UPDATE GAME HERE
-                    game.update();
+                    if (game.update() == true){
+                        isRunning = false;
+
+                        Context context = getContext();
+                        ((GameActivity)context).finish();
+
+                    }
 
                     // DRAW
                     game.draw(canvas);
@@ -92,8 +102,12 @@ public class GameSurfaceView extends SurfaceView implements Runnable{
                 }
             }
         }
+        // go back to main page or game over activity.
     }
-    //test
+    // inflate view
+
+
+
     public void resume(){
         isRunning = true;
         gameThread = new Thread(this);

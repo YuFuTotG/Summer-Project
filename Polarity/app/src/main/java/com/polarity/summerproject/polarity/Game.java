@@ -21,13 +21,16 @@ public class Game{
         paint.setColor(Color.WHITE);
 
         this.screen = screen;
-        obsHolder = new ObstacleHolder(this.screen, 200, 10);   // ENTER OBSTACLE SIZE AND SPEED HERE.
+        obsHolder = new ObstacleHolder(this.screen, 200, 8);   // ENTER OBSTACLE SIZE AND SPEED HERE.
 
     }
 
-    public void update(){
-        obsHolder.colCheck();
-        obsHolder.moveObsDown();
+    public boolean update(){
+        obsHolder.moveObj();
+        if (obsHolder.colCheck() == true){
+            return true;
+        }
+        return false;
     }
 
     public void draw(Canvas canvas){    // DRAW OBSTACLE IN ITS OWN FUNCTION? probably
@@ -37,13 +40,8 @@ public class Game{
     }
 
     public void onTouch(MotionEvent me){
-        /*
-        if (me.getX() < screen.getWidth()/2){
-            paint.setColor(Color.RED);
-        }else{
-            paint.setColor(Color.WHITE);
-        }
-        */
+        // when pressed down
+        obsHolder.playerMove((int) me.getX(), (int) me.getY());
     }
 
     public void obsHolderInit(){

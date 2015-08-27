@@ -9,10 +9,13 @@ import android.graphics.drawable.Drawable;
 
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 
 public class ObstacleHolder {
     Obstacle[] obsHolder;
     Player player;
+    DirectionPad dirPad;
     Screen screen;
     int rows, cols, obsSize, sideBoarderSize, topBoarderSize, speed;
 
@@ -40,13 +43,16 @@ public class ObstacleHolder {
             return Color.BLACK;
         }
     }
-    public void moveObsDown() {
+    public void moveObj() {
+        // obstacles
         for (int i = 0; i < this.rows*this.cols; i++){
             obsHolder[i].moveY();
         }
+        // player
+        player.move();
     }
 
-    public void colCheck(){
+    public boolean colCheck(){
         // for obstacle
         for (int i = 0; i < this.rows*this.cols; i++){
             if (this.obsHolder[i].y > this.screen.getHeight()){
@@ -56,15 +62,33 @@ public class ObstacleHolder {
             }
         }
         // for player
+        if (player.x < sideBoarderSize){
+            player.x = sideBoarderSize;
+        }else if (player.x + player.width > screen.getWidth() - sideBoarderSize){
+            player.x = -player.width + screen.getWidth() - sideBoarderSize;
+        }
+        // check for game over
+        if (player.y + player.height > screen.getHeight()){
+            // game over
+            return true;
+        }
+        return false;
+    }
+
+    public void gameOver(){
+
     }
 
     public void playerInit(Context context){
-        player = new Player(context, 160, 200, this.screen.getWidth() - 200, this.screen.getHeight() - 300);
+        player = new Player(context, obsSize, obsSize,
+                this.screen.getWidth() - sideBoarderSize - obsSize*((int)(cols/2)),
+                this.screen.getHeight() - topBoarderSize - obsSize*((int)(rows/2)), speed);
+        dirPad = new DirectionPad(context, obsSize * 2, obsSize * 2,
+                sideBoarderSize, screen.getHeight() - obsSize * 2 - topBoarderSize);
     }
 
     public void draw(Canvas canvas){
         // draw obstacles
-
         Paint paint = new Paint();
         for(int i = 0; i < obsHolder.length; i++){
             paint.setColor(obsHolder[i].color);
@@ -73,12 +97,28 @@ public class ObstacleHolder {
                     obsHolder[i].x + obsHolder[i].size,
                     obsHolder[i].y + obsHolder[i].size, paint);
         }
-
         // draw player
-        this.player.image.setBounds(this.player.x,
-                this.player.y,
-                this.player.x + this.player.width,
-                this.player.y + this.player.height);
-        this.player.image.draw(canvas);
+        this.player.draw(canvas);
+        this.dirPad.draw(canvas);
+    }
+
+    public void playerMove(int x, int y){
+        // collision check here dirpad
+        if (x < dirPad.width && y > dirPad.y) {
+            // top test y
+            if (y < dirPad.y + dirPad.height/3){
+                player.moveUp();
+            }else if (y < dirPad.y + dirPad.height/3*2) {
+                // middle test left or right
+                if (x < dirPad.width/2){
+                    player.moveLeft();
+                }else{
+                    player.moveRight();
+                }
+            }else {
+                // bottom
+                player.moveDown();
+            }
+        }
     }
 }

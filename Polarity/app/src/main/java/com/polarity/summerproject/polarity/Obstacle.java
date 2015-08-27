@@ -17,8 +17,4 @@ public class Obstacle {
     public void moveY() {
         this.y = this.y + speed;
     }
-
-    public void decreaseLength(Integer length) {
-        this.size =- 10;
-    }
 }
