@@ -17,4 +17,6 @@ public class Obstacle {
     public void moveY() {
         this.y = this.y + speed;
     }
+
+    public void speedUp(int speed){ this.speed += speed; }
 }

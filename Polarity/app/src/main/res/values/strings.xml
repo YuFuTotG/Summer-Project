@@ -5,5 +5,9 @@
     <string name="game_loop" />
     <string name="psst">psst</string>
     <string name="credits">Created by\n\nYu Fu\nJenny Kim\nTakeo Hirasawa\nBrian Chan\nAmy Zeng</string>
+    <string name="alt_credits">Created by\nAmy Zeng\n\nMusic by\nYu Fu\n\nGraphics by\nTakeo J Hirasawa\n\nSpecial Thanks to\nJenny Kim, Gary Lin, Brian Chan</string>
     <string name="play">Click To Play</string>
+    <string name="how_to_play">But how do I play?!</string>
+    <string name="instr_title">How to play!</string>
+    <string name="para1">Swipe to move\n\n\nTap and HOLD the ghost icon to change your ghost white, release to change him black\n\n\nYour goal is not to be seen. If you land on a tile opposite of your colour, you lose!</string>
 </resources>

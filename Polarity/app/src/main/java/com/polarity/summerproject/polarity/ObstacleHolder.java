@@ -4,18 +4,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 
 import java.util.Random;
-
-import static java.lang.Math.abs;
-
 
 public class ObstacleHolder {
     Obstacle[] obsHolder;
     Player player;
-    DirectionPad dirPad;
+    //DirectionPad dirPad;
+    PolarityButton btn;
     Screen screen;
     int rows, cols, obsSize, sideBoarderSize, topBoarderSize, speed;
 
@@ -28,6 +24,7 @@ public class ObstacleHolder {
         this.sideBoarderSize = (screen.getWidth()%size + 1)/2;
         this.topBoarderSize = (screen.getHeight()%size + 1)/2;
         this.obsHolder = new Obstacle[rows*cols];
+
 
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < cols; j++){
@@ -53,7 +50,7 @@ public class ObstacleHolder {
     }
 
     public boolean colCheck(){
-        // for obstacle
+        // for obstacle at bottom of screen
         for (int i = 0; i < this.rows*this.cols; i++){
             if (this.obsHolder[i].y > this.screen.getHeight()){
                 // move back to the top
@@ -62,28 +59,50 @@ public class ObstacleHolder {
             }
         }
         // for player
-        if (player.x < sideBoarderSize){
+        if (player.x < sideBoarderSize){    // side control
             player.x = sideBoarderSize;
         }else if (player.x + player.width > screen.getWidth() - sideBoarderSize){
-            player.x = -player.width + screen.getWidth() - sideBoarderSize;
+            player.x = -(int)player.width + screen.getWidth() - sideBoarderSize;
+        }
+        if (player.y < -player.height){  // top boarder control
+            player.moveDown();
         }
         // check for game over
         if (player.y + player.height > screen.getHeight()){
             // game over
             return true;
         }
-        return false;
+        return colourColCheck();
     }
+    // TODO: make this more efficient
+    public boolean colourColCheck(){ // checks if player is in wrong colour
+        for(int i = 0; i < obsHolder.length; i++){
+            if(obsHolder[i].x + obsSize/2 >= player.x
+                    && obsHolder[i].x + obsSize/2 <= player.x + player.width
+                    && obsHolder[i].y  + obsSize/2 >= player.y
+                    && obsHolder[i].y  + obsSize/2 <= player.y + player.height){
+                if(obsHolder[i].color != player.getColor()){
+                    return true;
+                }else{ return false; }
+            }
+        }
 
-    public void gameOver(){
-
+        return false;
     }
 
     public void playerInit(Context context){
         player = new Player(context, obsSize, obsSize,
                 this.screen.getWidth() - sideBoarderSize - obsSize*((int)(cols/2)),
                 this.screen.getHeight() - topBoarderSize - obsSize*((int)(rows/2)), speed);
-        dirPad = new DirectionPad(context, obsSize * 2, obsSize * 2,
+        for (int i = 0; i < this.rows*this.cols; i++){
+            if (obsHolder[i].y == player.y && obsHolder[i].x == player.x){
+                // set player color
+
+            }
+        }
+        //dirPad = new DirectionPad(context, obsSize * 2, obsSize * 2,
+        //        sideBoarderSize, screen.getHeight() - obsSize * 2 - topBoarderSize);
+        btn = new PolarityButton(context, (int)(obsSize * 1.5), (int)(obsSize * 1.5),
                 sideBoarderSize, screen.getHeight() - obsSize * 2 - topBoarderSize);
     }
 
@@ -99,26 +118,41 @@ public class ObstacleHolder {
         }
         // draw player
         this.player.draw(canvas);
-        this.dirPad.draw(canvas);
+        //this.dirPad.draw(canvas);
+        this.btn.draw(canvas);
+    }
+    // TODO: make this clearer. enumeration?
+    public void playerChange(boolean white){
+        player.change = white;
+        // handle button change
+        if(white)btn.changeColor(Colour.WHITE);
+        else btn.changeColor(Colour.BLACK);
     }
 
-    public void playerMove(int x, int y){
-        // collision check here dirpad
-        if (x < dirPad.width && y > dirPad.y) {
-            // top test y
-            if (y < dirPad.y + dirPad.height/3){
+    public void playerMove(Dir dir){
+        switch(dir){
+            case UP:
                 player.moveUp();
-            }else if (y < dirPad.y + dirPad.height/3*2) {
-                // middle test left or right
-                if (x < dirPad.width/2){
-                    player.moveLeft();
-                }else{
-                    player.moveRight();
-                }
-            }else {
-                // bottom
+                return;
+            case DOWN:
                 player.moveDown();
-            }
+                return;
+            case LEFT:
+                player.moveLeft();
+                return;
+            case RIGHT:
+                player.moveRight();
+                return;
+            default:
+                return;
+        }
+    }
+
+    public void speedUp(){
+        if(player.speed >= Game.MAX_SPEED) return;
+        player.speedUp(Game.SPEED_INTERVAL);
+        for(int i = 0; i < obsHolder.length; i++){
+            obsHolder[i].speedUp(Game.SPEED_INTERVAL);
         }
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple"
+    android:padding="32dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/instr_title"
+        android:textColor="@color/white"
+        android:id="@+id/title"
+        android:paddingBottom="40dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/title"
+        android:text="@string/para1"
+        android:textColor="@color/white"
+        android:id="@+id/para1"
+        android:paddingBottom="40dp"
+        android:textSize="15dp"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/para1"
+        android:src="@drawable/special_pacman_ghost"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+</RelativeLayout>

@@ -3,10 +3,12 @@ package com.polarity.summerproject.polarity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -67,8 +69,24 @@ public class GameSurfaceView extends SurfaceView implements Runnable{
                         isRunning = false;
 
                         Context context = getContext();
-                        ((GameActivity)context).finish();
 
+                        SharedPreferences sp = context.getSharedPreferences("game", 0);
+                        SharedPreferences.Editor spEditor = sp.edit();
+
+                        if(sp.contains("highScore")){
+                            if(sp.getInt("highScore", 0) < Game.score){
+                                // TODO: make a try?
+                                // replace
+                                spEditor.putInt("highScore", Game.score);
+                                spEditor.commit(); // apply()?
+                            }
+                        }else{
+                            spEditor.putInt("highScore", Game.score);
+                            spEditor.commit(); // apply()?
+                        }
+
+
+                        ((GameActivity) context).finish();
                     }
 
                     // DRAW
