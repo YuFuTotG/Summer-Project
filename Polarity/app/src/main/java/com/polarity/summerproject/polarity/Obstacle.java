@@ -1,21 +1,22 @@
 package com.polarity.summerproject.polarity;
 
+import android.graphics.Color;
+
 public class Obstacle {
-    Boolean color;
-    Integer distance;
-    Integer length;
+    int color;
+    int size, y, x, speed;
 
-    public Obstacle(Boolean color, Integer distance, Integer length) {
+    public Obstacle(int color, int size, int x, int y, int speed) {
         this.color = color;
-        this.distance = distance;
-        this.length = length;
+        this.y = y;
+        this.size = size;
+        this.x = x;
+        this.speed = speed;
     }
 
-    public void decreaseDistanceFromPlayer(Integer decreasedDistance) {
-        this.distance =- decreasedDistance;
+    public void moveY() {
+        this.y = this.y + speed;
     }
 
-    public void decreaseLength(Integer length) {
-        this.length =- length;
-    }
+    public void speedUp(int speed){ this.speed += speed; }
 }

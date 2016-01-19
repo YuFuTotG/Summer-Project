@@ -1,27 +1,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple">
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <ImageView
-            android:id="@+id/bottomTexture"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/texture"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
-    </LinearLayout>
-
+    android:background="@color/purple"
+    android:padding="32dp"
+    >
 
     <ImageView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/title"   />
+        android:src="@drawable/textured_title"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitStart"
+        android:adjustViewBounds="true"
+        android:paddingBottom="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/high_score"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:text="High Score: 0"
+        android:layout_below="@+id/title"
+        android:paddingBottom="32dp"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,8 +35,9 @@
         android:textColor="@color/white"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:gravity="center"/>
-
+        android:gravity="center"
+        android:layout_below="@+id/high_score"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -41,5 +47,14 @@
         android:layout_below="@+id/credits"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/how_to_play"
+        android:id="@+id/how_to_play_btn"
+        android:layout_below="@+id/startButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        />
 
 </RelativeLayout>
